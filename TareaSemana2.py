@@ -3,13 +3,6 @@ UMBRAL_BAJO = 1.0
 UMBRAL_MEDIO = 3.0
 UMBRAL_ALTO = 5.0
 
-#Definimos e iniciamos las variables utilizadas
- edad = 0
- nombre = " "
- lectura1 = 0.0
- lectura2 = 0.0
- promedio = 0.0
- estado = " "
 # Inicio del programa
 print("Reporte de Lecturas de Voltaje")
 
@@ -43,6 +36,6 @@ else:
     estado = "ALTO"
 
 # Reporte
-print(f"Buenos dias, Ing.: {nombre}")
+print(f"Alumno: {nombre}")
 print(f"Lecturas (V): {lectura1:.2f}, {lectura2:.2f} | Promedio: {promedio:.2f} V")
 print(f"Estado: {estado} ({promedio:.2f} V)")
