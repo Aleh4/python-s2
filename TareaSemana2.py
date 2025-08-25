@@ -1,11 +1,10 @@
-# Constantes de umbral
-UMBRAL_BAJO = 1.0
-UMBRAL_MEDIO = 3.0
-UMBRAL_ALTO = 5.0
-#Inicio 
-# Inicio del programa
-print("Reporte de Lecturas de Voltaje")
+import datetime as dt
 
+fecha = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+# Inicio del programa
+print("Reporte de Lecturas de Voltaje\n ")
+print(fecha)
 #Entrada del nombre
 nombre = input("Ingrese su nombre: ")
 
@@ -26,6 +25,11 @@ except ValueError:
 
 # Cálculo de promedio
 promedio = (lectura1 + lectura2) / 2
+
+# Constantes de umbral
+UMBRAL_BAJO = 1.0
+UMBRAL_MEDIO = 3.0
+UMBRAL_ALTO = 5.0
 
 # Clasificación
 if promedio < UMBRAL_BAJO:
