@@ -2,7 +2,7 @@
 UMBRAL_BAJO = 1.0
 UMBRAL_MEDIO = 3.0
 UMBRAL_ALTO = 5.0
-
+#Inicio 
 # Inicio del programa
 print("Reporte de Lecturas de Voltaje")
 
