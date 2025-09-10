@@ -7,17 +7,20 @@ from statistics import mean
 ROOT=Path(__file__).resolve().parents[1]#busca el lugar donde esta guardado el codigo
 #/USUARIO/Sesion4
 IN_FILE=ROOT/"data"/"raw"/"voltajes_250_sucio.csv" #ruta de ingreso
-OUT_FILE=ROOT/"data"/"processed"/"voltajes_250_sucio_limpio.csv" #ruta de salida
+OUT_FILE=ROOT/"data"/"processed"/"voltajes_250_sucio_limpio5.csv" #ruta de salida
 
 with open(IN_FILE,'r',encoding="utf-8", newline="") as fin, \
     open(OUT_FILE, "w", encoding="utf-8", newline="") as fout:
     reader=csv.DictReader(fin,delimiter=';')
-    writer=csv.DictWriter(fout,fieldnames=["Tiempo","voltaje","control"])
+    writer=csv.DictWriter(fout,fieldnames=["Tiempo","Voltaje","Temperatura","Alerta"])
     writer.writeheader()
 #leer linea por lineal y seleccionar en crudo raw 
     total = kept = 0
     bad_ts = bad_val = 0
+    temp=0
     voltajes=[]
+    Temperaturas=[]
+    Alertas=[]
     for row in reader:
         total+=1
         ts_raw  = (row.get("timestamp") or "").strip() #toma todos los valores de la columna timestamp
@@ -30,6 +33,7 @@ with open(IN_FILE,'r',encoding="utf-8", newline="") as fin, \
             continue #salta el comando
         try:
             val = float(val_raw)
+            voltajes.append(val)
         except ValueError:
             bad_ts += 1
             continue  # saltar fila si no es número
@@ -54,31 +58,42 @@ with open(IN_FILE,'r',encoding="utf-8", newline="") as fin, \
             bad_ts += 1
             continue  # saltar fila si no pudimos interpretar la fecha
         
-#sistema de control de voltaje - si V>= a 5 V entonces lanza una alerta
-        if val >= 5:
-            control = "CUIDADO"
-        else:
-            control = "OK"
-        voltajes.append(val)    
+#sistema de Alerta de voltaje - si V>= a 5 V entonces lanza una alerta
+        #if val >= 5:
+         #   Alerta = "CUIDADO"
+        #else:
+         #   Alerta = "OK"
+        #voltajes.append(val)
+        
+        if val is not None:
+            temp = 18*val-64
+            Temperaturas.append(temp) #creo una lista de temperaturas a partir de los voltajes
+            if temp >= 25:  #sistema de Alerta de temperatura - si T>= a 25°C entonces lanza una alerta
+                Alerta = "CUIDADO"
+                Alertas.append(Alerta)
+            else:
+                Alerta = "OK"    
+                           
 #grabar data en writer
-        writer.writerow({"Tiempo": ts_clean, "voltaje": f"{val:.2f}", "control":control})
+        writer.writerow({"Tiempo": ts_clean, "Voltaje": f"{val:.2f}","Temperatura":f"{temp:.2f}", "Alerta":Alerta})
         kept += 1 #sume 1 kept, en nuestro caso cambia de fila
         
 #KPIs
 n=len(voltajes)
 if n==0:
     #En caso no haya datos, seteamos los KPIs en 0 o None para evitar el error
-    kips={"n": 0, "min": None, "max": None, "prom": None, "alerts": 0, "alerts_pct": 0.0} 
+    kips={"n": 0 , "min": None, "max": None, "prom": None,"Temperaturas":None, "alerts": 0, "alerts_pct": 0.0} 
     
 else:
-    alertas=sum(v >= 5 for v in voltajes) #estructuras repetitivas simples
+    alert=len(Alertas) #estructuras repetitivas simples
     kips={
         'n': n,
-        'min': min(voltajes),
-        "max": max(voltajes),
-        "prom":mean(voltajes),
-        "alerts": alertas,
-        "alerts_pct": 100.0 * alertas / n,
+        'Vmin': float(f"{min(voltajes):.3f}"),
+        "Vmax": float(f"{max(voltajes):.3f}"),
+        "Vprom": float(f"{mean(voltajes):.3f}"),
+        "Temperatura_prom": float(f"{mean(Temperaturas):.3f}"),
+        "alerts": alert,
+        "alerts_pct": 100.0 * alert / n,
     }
 
 descartes_totales = bad_ts + bad_val            # equivale a (total - kept) con esta lógica

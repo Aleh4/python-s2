@@ -1,0 +1,14 @@
+mkdir python-s2 && cd python-s2
+git init
+echo ".venv/
+__pycache__/
+*.pyc
+.env
+.DS_Store" > .gitignore        # ignorar venv antes de crearlo
+echo "# S2 – Python VS Code + GitHub" > README.md
+
+
+git commit -m "Repo inicial con .gitignore y README"]
+git branch -M main
+git remote add origin https://github.com/<usuario>/<repo>.git
+git push -u origin main       # usa tu PAT si pide contraseña
