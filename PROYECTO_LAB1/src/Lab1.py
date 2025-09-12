@@ -58,17 +58,10 @@ with open(IN_FILE,'r',encoding="utf-8", newline="") as fin, \
             bad_ts += 1
             continue  # saltar fila si no pudimos interpretar la fecha
         
-#sistema de Alerta de voltaje - si V>= a 5 V entonces lanza una alerta
-        #if val >= 5:
-         #   Alerta = "CUIDADO"
-        #else:
-         #   Alerta = "OK"
-        #voltajes.append(val)
-        
         if val is not None:
             temp = 18*val-64
             Temperaturas.append(temp) #creo una lista de temperaturas a partir de los voltajes
-            if temp >= 25:  #sistema de Alerta de temperatura - si T>= a 25°C entonces lanza una alerta
+            if temp >= 40:  #sistema de Alerta de temperatura - si T>= a 40°C entonces lanza una alerta
                 Alerta = "CUIDADO"
                 Alertas.append(Alerta)
             else:
