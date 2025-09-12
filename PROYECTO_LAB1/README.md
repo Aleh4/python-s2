@@ -1,8 +1,8 @@
 # Laboratorio 1: Procesamiento de Datos de Sensores en Python
 
-Este proyecto es parte del Laboratorio 1 del curso de Programación de Computadoras con Python, enfocado en el aprendizaje de telemetría y el manejo de datos de sensores. Aquí aprenderás a limpiar, transformar y analizar datos de voltaje, generando alertas y métricas clave para evaluar la calidad y el comportamiento de los datos.
+Este proyecto es parte del Laboratorio 1 del curso de Programación de Computadoras con Python, enfocado en el aprendizaje de funciones elementales de la programación. Aquí aprenderás a limpiar, transformar y analizar datos de voltaje, generando alertas y métricas clave para evaluar la calidad y el comportamiento de los datos.
 
----
+
 
 ## ¿Qué vas a lograr con este laboratorio?
 
@@ -11,7 +11,7 @@ Este proyecto es parte del Laboratorio 1 del curso de Programación de Computado
 - **Generar alertas** cuando la temperatura supera un umbral.
 - **Documentar resultados** en un archivo CSV procesado y mostrar KPIs en pantalla.
 
----
+
 
 ## ¿Cómo está organizado el proyecto?
 
@@ -22,13 +22,13 @@ PROYECTO_LAB1/
 │   ├── raw/
 │   │   └── datos_sucios_250.csv         # Archivo de entrada con datos crudos
 │   └── processed/
-│       └── datos_sucios_250_limpio1.csv # Archivo de salida con datos limpios
+│       └── datos_sucios_250_limpios.csv # Archivo de salida con datos limpios
 │
 └── src/
     └── Lab1.py                          # Script principal de procesamiento
 ```
 
----
+
 
 ## ¿Cómo funciona el código principal (`Lab1.py`)?
 
@@ -61,7 +61,7 @@ PROYECTO_LAB1/
    - Temperatura promedio
    - Número y porcentaje de alertas
 
----
+
 
 ## ¿Cómo lo uso?
 
@@ -72,19 +72,8 @@ PROYECTO_LAB1/
    ```
 3. Revisa el archivo procesado en `data/processed/datos_sucios_250_limpio1.csv` y los KPIs que aparecen en la pantalla.
 
----
+
 
 ## ¿Por qué es útil este laboratorio?
 
 Este laboratorio te ayuda a entender cómo trabajar con datos reales de sensores, algo fundamental en telemetría y monitoreo. Aprenderás a limpiar datos, convertir unidades, generar alertas automáticas y calcular métricas de calidad, habilidades esenciales para cualquier ingeniero o científico de datos.
-
----
-
-## Autor
-
-Curso de Programación de Computadoras - Python  
-Universidad / Profesor: [Completa según corresponda]
-
----
-
-¿Tienes dudas sobre el código o quieres adaptarlo para otros sensores? ¡Explora, experimenta y aprende!
