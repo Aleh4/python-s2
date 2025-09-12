@@ -6,8 +6,8 @@ from statistics import mean
 #crear mis variables de rutas para ingreso de archivo y salida de archivo
 ROOT=Path(__file__).resolve().parents[1]#busca el lugar donde esta guardado el codigo
 #/USUARIO/Sesion4
-IN_FILE=ROOT/"data"/"raw"/"voltajes_250_sucio.csv" #ruta de ingreso
-OUT_FILE=ROOT/"data"/"processed"/"voltajes_250_sucio_limpio5.csv" #ruta de salida
+IN_FILE=ROOT/"data"/"raw"/"datos_sucios_250.csv" #ruta de ingreso
+OUT_FILE=ROOT/"data"/"processed"/"datos_sucios_250_limpio1.csv" #ruta de salida
 
 with open(IN_FILE,'r',encoding="utf-8", newline="") as fin, \
     open(OUT_FILE, "w", encoding="utf-8", newline="") as fout:
@@ -35,7 +35,7 @@ with open(IN_FILE,'r',encoding="utf-8", newline="") as fin, \
             val = float(val_raw)
             voltajes.append(val)
         except ValueError:
-            bad_ts += 1
+            bad_val += 1
             continue  # saltar fila si no es número
 #limpieza de data de tiempo 
         ts_clean = None
